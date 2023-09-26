@@ -1,1 +1,1 @@
-# { cookiecutter.project_slug }
+# latex-napkin
