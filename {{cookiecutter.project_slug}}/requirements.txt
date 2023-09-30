@@ -1,0 +1,2 @@
+# Python requirements
+pygments>=2.16
