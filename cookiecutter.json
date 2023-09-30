@@ -1,0 +1,35 @@
+{
+    "project_slug": "latex-napkin",
+    "author": "Your Name",
+    "title": "Title",
+    "date": "\\today",
+    "documentclass": [
+        "article",
+        "report",
+        "book"
+    ],
+    "documentoptions": "a4paper, 11pt",
+    "language": [
+        "english",
+        "spanish",
+        "catalan"
+    ],
+    "math_numeration": [
+        "section",
+        "chapter",
+        "plain"
+    ],
+    "twoside": [true, false],
+    "minted": [true, false],
+    "pythontex": [true, false],
+    "_jinja2_env_vars": {
+        "lstrip_blocks": true,
+        "trim_blocks": true,
+        "block_start_string": "<%",
+        "block_end_string": "%>",
+        "variable_start_string": "<<",
+        "variable_end_string": ">>",
+        "comment_start_string": "<#",
+        "comment_end_string": "#>"
+    }
+}

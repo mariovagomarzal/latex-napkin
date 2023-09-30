@@ -1,0 +1,17 @@
+\documentclass[<< cookiecutter.documentoptions >>, <% if cookiecutter.twoside %>twoside<% endif %>]{<< cookiecutter.documentclass >>}
+
+\input{tex/preamble.tex}
+\input{tex/macros.tex}
+
+\title{<< cookiecutter.title >>}
+\author{<< cookiecutter.author >>}
+\date{<< cookiecutter.date >>}
+
+\begin{document}
+  \maketitle
+
+  {
+    \hypersetup{linkcolor=black}
+    \tableofcontents
+  }
+\end{document}
