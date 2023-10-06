@@ -21,6 +21,16 @@
 %=== 'graphicx' package ===%
 \usepackage{graphicx}
 
+<% if cookiecutter.pythontex %>
+%=== 'pythontex' package ===%
+\usepackage{pythontex}
+
+<% endif %>
+<% if cookiecutter.minted %>
+%=== 'minted' package ===%
+\usepackage{minted}
+
+<% endif %>
 %=== Document title ===%
 \usepackage{titling}
 
