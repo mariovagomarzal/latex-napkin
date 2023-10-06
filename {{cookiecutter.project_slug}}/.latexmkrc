@@ -26,7 +26,8 @@ sub mypythontex {
    }
    return $ret;
 }
-<%+ endif %>
+
+<% endif %>
 # Use luaLaTeX
 <% if cookiecutter.pythontex or cookiecutter.minted %>
 $pdflatex = 'lualatex -shell-escape -synctex=1 -interaction=nonstopmode -file-line-error %O %S';

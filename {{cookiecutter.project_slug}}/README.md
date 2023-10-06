@@ -15,7 +15,8 @@ Then, install the required packages:
 ```bash
 pip install -r requirements.txt
 ```
-<%+ endif %>
+
+<% endif %>
 ## Compile
 
 Run the following command from the root of the project to compile the

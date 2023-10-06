@@ -299,8 +299,8 @@ TSWLatexianTemp*
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
-
 <% if cookiecutter.pythontex or cookiecutter.minted %>
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
