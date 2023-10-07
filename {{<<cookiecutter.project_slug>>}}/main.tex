@@ -1,4 +1,10 @@
-\documentclass[<< cookiecutter.documentoptions >><% if cookiecutter.twoside %>, twoside<% endif %>]{<< cookiecutter.documentclass >>}
+<% if cookiecutter.documentclass == "book" and not(cookiecutter.twoside) %>
+\documentclass[<< cookiecutter.documentoptions >>, oneside]{<< cookiecutter.documentclass >>}
+<% elif not(cookiecutter.documentclass == "book") and cookiecutter.twoside %>
+\documentclass[<< cookiecutter.documentoptions >>, twoside]{<< cookiecutter.documentclass >>}
+<% else %>
+\documentclass[<< cookiecutter.documentoptions >>]{<< cookiecutter.documentclass >>}
+<% endif %>
 
 \input{tex/preamble.tex}
 \input{tex/macros.tex}
