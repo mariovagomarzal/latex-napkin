@@ -183,6 +183,7 @@
 \newcommand{\problemname}{Problema}
 \newcommand{\questionname}{Cuestión}
 \newcommand{\exercisename}{Ejercicio}
+\newcommand{\solutionname}{Solución}
 <% elif cookiecutter.language == "catalan" %>
 \newcommand{\theoremname}{Teorema}
 \newcommand{\propositionname}{Proposició}
@@ -196,6 +197,7 @@
 \newcommand{\problemname}{Problema}
 \newcommand{\questionname}{Qüestió}
 \newcommand{\exercisename}{Exercici}
+\newcommand{\solutionname}{Solució}
 <% else %>
 \newcommand{\theoremname}{Theorem}
 \newcommand{\propositionname}{Proposition}
@@ -209,6 +211,7 @@
 \newcommand{\problemname}{Problem}
 \newcommand{\questionname}{Question}
 \newcommand{\exercisename}{Exercise}
+\newcommand{\solutionname}{Solution}
 <% endif %>
 
 %= Numbered math environments =%
@@ -274,3 +277,15 @@ cookiecutter.math_numeration >>]%
   {question*}
 \declaretheorem[name=\exercisename, style=thmblack, numbered=no]%
   {exercise*}
+
+%= Proof and solution environments =%
+\newenvironment{coloredproof}[1][MidnightBlue!50!black]%
+  {\begin{proof} \color{#1}}%
+  {\end{proof}}
+
+\newenvironment{solution}%
+  {\begin{proof}[\solutionname] \renewcommand{\qed}{}}%
+  {\end{proof}}
+\newenvironment{coloredsolution}[1][MidnightBlue!50!black]%
+  {\begin{solution} \color{#1}}%
+  {\end{solution}}
