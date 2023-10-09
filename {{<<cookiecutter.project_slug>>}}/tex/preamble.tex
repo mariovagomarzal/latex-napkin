@@ -1,0 +1,291 @@
+%==========%
+% Preamble %
+%==========%
+
+%=== Language ===%
+\usepackage[<< cookiecutter.language >>]{babel}
+
+%=== 'geometry' package ===%
+\usepackage{geometry}
+
+%=== Colors ===%
+\usepackage[svgnames]{xcolor}
+\newcommand{\sectioncolor}{\color{purple}}
+
+%=== 'hyperref' package ===%
+\usepackage[pdfusetitle]{hyperref}
+\hypersetup{
+  colorlinks=true,
+}
+
+%=== 'graphicx' package ===%
+\usepackage{graphicx}
+
+<% if cookiecutter.pythontex %>
+%=== 'pythontex' package ===%
+\usepackage{pythontex}
+
+<% endif %>
+<% if cookiecutter.minted %>
+%=== 'minted' package ===%
+\usepackage{minted}
+
+%=== 'booktabs' package ===%
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.2}
+
+<% endif %>
+%=== Document title ===%
+\usepackage{titling}
+
+\pretitle{\begin{center}\huge\sffamily\bfseries}
+\posttitle{\end{center}}
+
+\preauthor{\begin{center}\Large\sffamily\begin{tabular}[t]{c}}
+\postauthor{\end{tabular}\end{center}}
+
+\predate{\begin{center}\Large\sffamily}
+\postdate{\end{center}}
+
+%=== Section titles ===%
+\usepackage{titlesec}
+
+<% if cookiecutter.documentclass == "book" or cookiecutter.documentclass == "report" %>
+\titleformat{\part}[display]{\Huge\bfseries\filcenter}
+  {\sectioncolor{}\scalebox{2.5}{\thepart}}
+  {1ex}{}
+
+\titleformat{\chapter}{\LARGE\sffamily\bfseries}
+  {\sectioncolor{}\scalebox{2.25}{\thechapter}}
+  {1ex}{}
+
+<% endif %>
+\titleformat{\section}{\Large\sffamily\bfseries}
+  {\sectioncolor{}{\normalfont\sffamily\S}\thesection}
+  {1ex}{}
+
+\titleformat{\subsection}{\large\sffamily\bfseries}
+  {\sectioncolor{}\thesubsection}
+  {1ex}{}
+
+\titleformat{\subsubsection}{\sffamily\bfseries}
+  {\sectioncolor{}\thesubsubsection}
+  {1ex}{}
+
+%=== Header and footer ===%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\setlength{\headheight}{14pt}
+\addtolength{\topmargin}{-2pt}
+
+<% if cookiecutter.twoside %>
+<% if cookiecutter.documentclass == "book" or cookiecutter.documentclass == "report" %>
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{%
+  \markright{\thesection.\ #1}}
+
+% Chapter and section titles in headers
+\fancyhf{}
+\fancyhead[RE]{\sffamily\bfseries\nouppercase{\leftmark}}
+\fancyhead[LO]{\sffamily\bfseries\nouppercase{\rightmark}}
+\fancyhead[RO,LE]{\sffamily\bfseries\thepage}
+<% else %>
+\renewcommand{\sectionmark}[1]{%
+  \markright{\thesection.\ #1}}
+\renewcommand{\subsectionmark}[1]{%
+  \markright{\thesubsection.\ #1}}
+
+% Section and subsection titles in headers
+\fancyhf{}
+\fancyhead[LE]{\sffamily\bfseries\nouppercase{\rightmark}}
+\fancyhead[RO]{\sffamily\bfseries\nouppercase{\leftmark}}
+\fancyhead[RE,LO]{\sffamily\bfseries\thepage}
+<% endif %>
+<% else %>
+<% if cookiecutter.documentclass == "book" or cookiecutter.documentclass == "report" %>
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\thechapter.\ #1}{}}
+
+% Chapter titles in headers
+\fancyhf{}
+\fancyhead[L]{\sffamily\bfseries\nouppercase{\leftmark}}
+\fancyhead[R]{\sffamily\bfseries\thepage}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyfoot[C]{\sffamily\thepage}
+}
+<% else %>
+\renewcommand{\sectionmark}[1]{%
+  \markboth{\thesection.\ #1}{}}
+
+% Section titles in headers
+\fancyhf{}
+\fancyhead[L]{\sffamily\bfseries\nouppercase{\leftmark}}
+\fancyhead[R]{\sffamily\bfseries\thepage}
+<% endif %>
+<% endif %>
+% Plain pages: no header and centered page number
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyfoot[C]{\sffamily\thepage}
+}
+
+%=== Mathematics ===%
+\usepackage{mathtools}
+\mathtoolsset{centercolon}
+
+\usepackage{amssymb}
+
+%== Math environments ==%
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries\color{MediumBlue},
+  headpunct={},
+  postheadspace=1em,
+  spaceabove=1em,
+  spacebelow=1em,
+]{thmblue}
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries\color{FireBrick},
+  headpunct={:},
+  spaceabove=1em,
+  spacebelow=1em,
+]{thmred}
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries\color{ForestGreen},
+  headpunct={ ---},
+  spaceabove=1em,
+  spacebelow=1em,
+]{thmgreen}
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries\color{black},
+  spaceabove=1em,
+  spacebelow=1em,
+]{thmblack}
+
+%= Math environments names =%
+<% if cookiecutter.language == "spanish" %>
+\newcommand{\theoremname}{Teorema}
+\newcommand{\propositionname}{Proposición}
+\newcommand{\corollaryname}{Corolario}
+\newcommand{\lemmaname}{Lema}
+\newcommand{\conjecturename}{Conjetura}
+\newcommand{\definitionname}{Definición}
+\newcommand{\notationname}{Notación}
+\newcommand{\examplename}{Ejemplo}
+\newcommand{\remarkname}{Nota}
+\newcommand{\problemname}{Problema}
+\newcommand{\questionname}{Cuestión}
+\newcommand{\exercisename}{Ejercicio}
+\newcommand{\solutionname}{Solución}
+<% elif cookiecutter.language == "catalan" %>
+\newcommand{\theoremname}{Teorema}
+\newcommand{\propositionname}{Proposició}
+\newcommand{\corollaryname}{Corol·lari}
+\newcommand{\lemmaname}{Lema}
+\newcommand{\conjecturename}{Conjectura}
+\newcommand{\definitionname}{Definició}
+\newcommand{\notationname}{Notació}
+\newcommand{\examplename}{Exemple}
+\newcommand{\remarkname}{Nota}
+\newcommand{\problemname}{Problema}
+\newcommand{\questionname}{Qüestió}
+\newcommand{\exercisename}{Exercici}
+\newcommand{\solutionname}{Solució}
+<% else %>
+\newcommand{\theoremname}{Theorem}
+\newcommand{\propositionname}{Proposition}
+\newcommand{\corollaryname}{Corollary}
+\newcommand{\lemmaname}{Lemma}
+\newcommand{\conjecturename}{Conjecture}
+\newcommand{\definitionname}{Definition}
+\newcommand{\notationname}{Notation}
+\newcommand{\examplename}{Example}
+\newcommand{\remarkname}{Remark}
+\newcommand{\problemname}{Problem}
+\newcommand{\questionname}{Question}
+\newcommand{\exercisename}{Exercise}
+\newcommand{\solutionname}{Solution}
+<% endif %>
+
+%= Numbered math environments =%
+<% if cookiecutter.math_numeration != "plain" %>
+\declaretheorem[name=\theoremname, style=thmblue, numberwithin=<<
+cookiecutter.math_numeration >>]%
+  {theorem}
+<% else %>
+\declaretheorem[name=\theoremname, style=thmblue]%
+  {theorem}
+<% endif %>
+\declaretheorem[name=\propositionname, style=thmblue, sibling=theorem]%
+  {proposition}
+\declaretheorem[name=\corollaryname, style=thmblue, sibling=theorem]{corollary}
+\declaretheorem[name=\lemmanema, style=thmblue, sibling=theorem]%
+  {lemma}
+\declaretheorem[name=\conjecturename, style=thmblue, sibling=theorem]%
+  {conjecture}
+\declaretheorem[name=\definitionname, style=thmred, sibling=theorem]%
+  {definition}
+\declaretheorem[name=\notationname, style=thmred, sibling=theorem]%
+  {notation}
+\declaretheorem[name=\examplename, style=thmgreen, sibling=theorem]%
+  {example}
+\declaretheorem[name=\remarkname, style=thmgreen, sibling=theorem]%
+  {remark}
+
+<% if cookiecutter.math_numeration != "plain" %>
+\declaretheorem[name=\problemname, style=thmblack, numberwithin=<<
+cookiecutter.math_numeration >>]%
+  {problem}
+<% else %>
+\declaretheorem[name=\problemname, style=thmblack]%
+  {problem}
+<% endif %>
+\declaretheorem[name=\questionname, style=thmblack, sibling=problem]%
+  {question}
+\declaretheorem[name=\exercisename, style=thmblack, sibling=problem]%
+  {exercise}
+
+%= Unnumbered math environments =%
+\declaretheorem[name=\theoremname, style=thmblue, numbered=no]%
+  {theorem*}
+\declaretheorem[name=\propositionname, style=thmblue, numbered=no]%
+  {proposition*}
+\declaretheorem[name=\corollaryname, style=thmblue, numbered=no]%
+  {corollary*}
+\declaretheorem[name=\lemmanema, style=thmblue, numbered=no]%
+  {lemma*}
+\declaretheorem[name=\conjecturename, style=thmblue, numbered=no]%
+  {conjecture*}
+\declaretheorem[name=\definitionname, style=thmred, numbered=no]%
+  {definition*}
+\declaretheorem[name=\notationname, style=thmred, numbered=no]%
+  {notation*}
+\declaretheorem[name=\examplename, style=thmgreen, numbered=no]%
+  {example*}
+\declaretheorem[name=\remarkname, style=thmgreen, numbered=no]%
+  {remark*}
+\declaretheorem[name=\problemname, style=thmblack, numbered=no]%
+  {problem*}
+\declaretheorem[name=\questionname, style=thmblack, numbered=no]%
+  {question*}
+\declaretheorem[name=\exercisename, style=thmblack, numbered=no]%
+  {exercise*}
+
+%= Proof and solution environments =%
+\newenvironment{coloredproof}[1][MidnightBlue!50!black]%
+  {\begin{proof} \color{#1}}%
+  {\end{proof}}
+
+\newenvironment{solution}%
+  {\begin{proof}[\solutionname] \renewcommand{\qed}{}}%
+  {\end{proof}}
+\newenvironment{coloredsolution}[1][MidnightBlue!50!black]%
+  {\begin{solution} \color{#1}}%
+  {\end{solution}}
